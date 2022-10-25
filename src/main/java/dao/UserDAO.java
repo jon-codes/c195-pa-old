@@ -44,12 +44,12 @@ public class UserDAO {
         }
     }
 
-//    public static Optional<User> getUser(int id) {
-//        for (User user : users) {
-//            if (user.id() == id) return Optional.of(user);
-//        }
-//        return Optional.empty();
-//    }
+    public static Optional<User> getUser(int id) {
+        for (User user : users) {
+            if (user.id() == id) return Optional.of(user);
+        }
+        return Optional.empty();
+    }
 
     public static Optional<User> getUserByUsername(String username) {
         for (User user : users) {

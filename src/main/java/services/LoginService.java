@@ -15,19 +15,21 @@ import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
 
 public class LoginService {
+    private static int currentUserId;
 
-    private final DateTimeFormatter logDateTimeFormatter
+    private static final DateTimeFormatter logDateTimeFormatter
             = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss").withZone(
             ZoneId.of("UTC")
     );
 
-    public boolean authenticate(String username, String password) throws IOException {
+    public static boolean authenticate(String username, String password) throws IOException {
         Instant timestamp = Instant.now();
 
         Optional<User> foundUser = UserDAO.getUserByUsername(username);
         if (foundUser.isPresent() && foundUser.get().checkPassword(password)) {
             System.out.println("Authenticated user: " + foundUser.get().id());
             recordLoginAttempt(username, timestamp, true);
+            currentUserId = foundUser.get().id();
             return true;
         }
 
@@ -35,7 +37,11 @@ public class LoginService {
         return false;
     }
 
-    private void recordLoginAttempt(String username, Instant timestamp, Boolean succeeded) throws IOException {
+    public static Optional<User> getCurrentUser() {
+        return UserDAO.getUser(currentUserId);
+    }
+
+    private static void recordLoginAttempt(String username, Instant timestamp, Boolean succeeded) throws IOException {
         String projectDir = System.getProperty("user.dir");
         Path logFilePath = Path.of(projectDir, "login_activity.txt");
 

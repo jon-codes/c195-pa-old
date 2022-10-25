@@ -18,7 +18,7 @@ public class ClientSchedulingApp extends Application {
     public void start(Stage primaryStage) throws IOException {
         DbConnection.open();
 
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/mainView.fxml"));
         root.getStylesheets().add("/css/styles.css");
 
         ResourceBundle content = ResourceBundle.getBundle("properties.content");

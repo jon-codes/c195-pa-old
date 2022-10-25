@@ -11,10 +11,7 @@ import java.io.IOException;
 import java.time.ZoneId;
 import java.util.ResourceBundle;
 
-
-public class LoginController {
-    private LoginService loginService = new LoginService();
-
+public class LoginFormController extends ContentController {
     private final SimpleStringProperty candidateUsername = new SimpleStringProperty();
     private final SimpleStringProperty candidatePassword = new SimpleStringProperty();
 
@@ -70,10 +67,8 @@ public class LoginController {
         usernameField.disableProperty().set(true);
         passwordField.disableProperty().set(true);
 
-        if (loginService.authenticate(candidateUsername.get(), candidatePassword.get())) {
-            // TODO: actually transition the scene here
-            new Alert(AlertType.INFORMATION, "Login successful!").show();
-
+        if (LoginService.authenticate(candidateUsername.get(), candidatePassword.get())) {
+            parentController.renderCustomerTable();
         } else {
             errorLabel.setText(credentialsErrorMsg);
         }
