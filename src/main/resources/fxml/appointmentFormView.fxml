@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <VBox xmlns:fx="http://javafx.com/fxml"
       xmlns="http://javafx.com/javafx"
       fx:controller="controllers.AppointmentFormController">
@@ -12,4 +12,13 @@
         </VBox.margin>
         <Label text="Appointment form"/>
     </VBox>
+    <HBox>
+        <ToolBar maxWidth="Infinity" prefHeight="40.0" HBox.hgrow="ALWAYS">
+            <Button fx:id="cancelButton" onAction="#handleCancel" text="Cancel"/>
+        </ToolBar>
+        <ToolBar layoutX="10.0" layoutY="10.0" maxWidth="Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0"
+                 HBox.hgrow="ALWAYS">
+            <Button fx:id="submitButton" onAction="#handleSubmit" text="Submit" disable="true"/>
+        </ToolBar>
+    </HBox>
 </VBox>

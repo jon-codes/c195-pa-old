@@ -1,6 +1,8 @@
-package services;
+package repositories;
 
 import dao.UserDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import models.User;
 
 import java.io.IOException;
@@ -14,18 +16,40 @@ import java.util.Optional;
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
 
-public class LoginService {
-    private static int currentUserId;
+public class UserRepository {
+    private static final ObservableList<User> users;
+
+    static {
+        users = FXCollections.observableArrayList(UserDAO.selectAll());
+    }
 
     private static final DateTimeFormatter logDateTimeFormatter
             = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss").withZone(
             ZoneId.of("UTC")
     );
 
+    private static int currentUserId;
+
+    public static Optional<User> get(int id) {
+        for (User user : users) {
+            if (user.id() == id) return Optional.of(user);
+        }
+        return Optional.empty();
+    }
+
+    public static Optional<User> getByUsername(String username) {
+        for (User user : users) {
+            if (user.username().equals(username)) return Optional.of(user);
+        }
+        return Optional.empty();
+    }
+
+    public static Optional<User> getCurrentUser() { return get(currentUserId); }
+
     public static boolean authenticate(String username, String password) throws IOException {
         Instant timestamp = Instant.now();
 
-        Optional<User> foundUser = UserDAO.getUserByUsername(username);
+        Optional<User> foundUser = getByUsername(username);
         if (foundUser.isPresent() && foundUser.get().checkPassword(password)) {
             System.out.println("Authenticated user: " + foundUser.get().id());
             recordLoginAttempt(username, timestamp, true);
@@ -37,9 +61,6 @@ public class LoginService {
         return false;
     }
 
-    public static Optional<User> getCurrentUser() {
-        return UserDAO.getUser(currentUserId);
-    }
 
     private static void recordLoginAttempt(String username, Instant timestamp, Boolean succeeded) throws IOException {
         String projectDir = System.getProperty("user.dir");
@@ -54,4 +75,5 @@ public class LoginService {
                 CREATE, APPEND
         );
     }
+
 }

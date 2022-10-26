@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import services.LoginService;
+import repositories.UserRepository;
 
 import java.io.IOException;
 import java.time.ZoneId;
@@ -66,7 +66,7 @@ public class LoginFormController extends ContentController {
         usernameField.disableProperty().set(true);
         passwordField.disableProperty().set(true);
 
-        if (LoginService.authenticate(candidateUsername.get(), candidatePassword.get())) {
+        if (UserRepository.authenticate(candidateUsername.get(), candidatePassword.get())) {
             parentController.onLogin();
         } else {
             errorLabel.setText(credentialsErrorMsg);

@@ -10,16 +10,27 @@
         <VBox.margin>
             <Insets topRightBottomLeft="20"/>
         </VBox.margin>
-        <Label text="Customer table"/>
+        <TableView fx:id="customerTable">
+            <columns>
+                <TableColumn fx:id="idColumn" editable="false" text="ID" />
+                <TableColumn fx:id="nameColumn" editable="false" text="Name" />
+                <TableColumn fx:id="addressColumn" editable="false" text="Address" />
+                <TableColumn fx:id="postalCodeColumn" editable="false" text="PostalCode" />
+                <TableColumn fx:id="phoneColumn" editable="false" text="Phone" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
     </VBox>
     <HBox>
         <ToolBar maxWidth="Infinity" prefHeight="40.0" HBox.hgrow="ALWAYS">
-            <Button fx:id="editButton" text="Edit" disable="true"/>
-            <Button fx:id="deleteButton" text="Delete" disable="true"/>
+            <Button fx:id="editButton" onAction="#handleEdit" text="Edit" disable="true"/>
+            <Button fx:id="deleteButton" onAction="#handleDelete" text="Delete" disable="true"/>
         </ToolBar>
         <ToolBar layoutX="10.0" layoutY="10.0" maxWidth="Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0"
                  HBox.hgrow="ALWAYS">
-            <Button text="New" fx:id="newButton"/>
+            <Button fx:id="newButton" onAction="#handleNew" text="New"/>
         </ToolBar>
     </HBox>
 </VBox>
