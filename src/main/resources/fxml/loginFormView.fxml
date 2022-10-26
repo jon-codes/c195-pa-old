@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="controllers.LoginFormController"
       xmlns="http://javafx.com/javafx/11">
-    <Label text="Username" fx:id="userNameLabel"/>
-    <TextField fx:id="usernameField"/>
-    <Label text="Password" fx:id="passwordLabel"/>
-    <PasswordField fx:id="passwordField"/>
-    <Label fx:id="errorLabel"/>
-    <Pane VBox.vgrow="ALWAYS"/>
+    <VBox VBox.vgrow="ALWAYS">
+        <VBox.margin>
+            <Insets topRightBottomLeft="20"/>
+        </VBox.margin>
+        <Label text="Username" fx:id="userNameLabel"/>
+        <TextField fx:id="usernameField"/>
+        <Label text="Password" fx:id="passwordLabel"/>
+        <PasswordField fx:id="passwordField"/>
+        <Label fx:id="errorLabel"/>
+    </VBox>
     <HBox>
         <ToolBar maxWidth="Infinity" prefHeight="40.0"
                  HBox.hgrow="ALWAYS">
-            <Label fx:id="locationLabel" text="Location" />
+            <Label fx:id="locationLabel" text="Location"/>
         </ToolBar>
         <ToolBar layoutX="10.0" layoutY="10.0" maxWidth="Infinity"
                  nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0"
                  HBox.hgrow="ALWAYS">
             <Button fx:id="submitButton" disable="true" text="Login"
                     onAction="#handleSubmit"
-                    />
+            />
         </ToolBar>
     </HBox>
 </VBox>

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns:fx="http://javafx.com/fxml"
       xmlns="http://javafx.com/javafx"
       fx:controller="controllers.AppointmentFormController">
+    <VBox VBox.vgrow="ALWAYS">
+        <VBox.margin>
+            <Insets topRightBottomLeft="20"/>
+        </VBox.margin>
+        <Label text="Appointment form"/>
+    </VBox>
 </VBox>
