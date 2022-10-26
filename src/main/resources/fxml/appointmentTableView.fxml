@@ -6,7 +6,7 @@
 <VBox xmlns:fx="http://javafx.com/fxml"
       xmlns="http://javafx.com/javafx"
       fx:controller="controllers.AppointmentTableController">
-    <TabPane>
+    <TabPane VBox.vgrow="ALWAYS">
         <Tab text="This week" closable="false">
 <!--            <content></content>-->
         </Tab>
@@ -15,8 +15,12 @@
         </Tab>
     </TabPane>
     <HBox>
-        <Button text="New" fx:id="newButton"/>
-        <Button text="Edit" fx:id="editButton"/>
-        <Button text="Delete" fx:id="deleteButton"/>
+        <ToolBar maxWidth="Infinity" prefHeight="40.0" HBox.hgrow="ALWAYS">
+            <Button fx:id="editButton" text="Edit" disable="true"/>
+            <Button fx:id="deleteButton" text="Delete" disable="true"/>
+        </ToolBar>
+        <ToolBar layoutX="10.0" layoutY="10.0" maxWidth="Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" HBox.hgrow="ALWAYS">
+            <Button text="New" fx:id="newButton"/>
+        </ToolBar>
     </HBox>
 </VBox>

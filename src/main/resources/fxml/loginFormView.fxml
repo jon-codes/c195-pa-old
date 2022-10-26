@@ -12,16 +12,16 @@
     <Label fx:id="errorLabel"/>
     <Pane VBox.vgrow="ALWAYS"/>
     <HBox>
-        <ToolBar maxWidth="1.7976931348623157E308" prefHeight="40.0"
+        <ToolBar maxWidth="Infinity" prefHeight="40.0"
                  HBox.hgrow="ALWAYS">
-            <Label text="Location" fx:id="locationLabel"/>
+            <Label fx:id="locationLabel" text="Location" />
         </ToolBar>
-        <ToolBar layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308"
+        <ToolBar layoutX="10.0" layoutY="10.0" maxWidth="Infinity"
                  nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0"
                  HBox.hgrow="ALWAYS">
-            <Button disable="true" mnemonicParsing="false" text="Login"
+            <Button fx:id="submitButton" disable="true" text="Login"
                     onAction="#handleSubmit"
-                    fx:id="submitButton"/>
+                    />
         </ToolBar>
     </HBox>
 </VBox>
