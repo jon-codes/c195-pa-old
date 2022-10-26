@@ -3,8 +3,10 @@ package controllers;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import services.LoginService;
 
 import java.io.IOException;
@@ -68,7 +70,7 @@ public class LoginFormController extends ContentController {
         passwordField.disableProperty().set(true);
 
         if (LoginService.authenticate(candidateUsername.get(), candidatePassword.get())) {
-            parentController.renderCustomerTable();
+            parentController.goToCustomerTable();
         } else {
             errorLabel.setText(credentialsErrorMsg);
         }

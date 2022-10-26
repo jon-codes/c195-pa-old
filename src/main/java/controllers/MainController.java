@@ -19,46 +19,61 @@ public class MainController {
 
     @FXML
     private void initialize() throws IOException {
-        renderLoginForm();
+        goToLoginForm();
     }
 
-    private void renderLoginForm() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(LOGIN_FORM));
-        Node pane = loader.load();
-        LoginFormController controller = loader.getController();
-        controller.setParentController(this);
-        contentPane.getChildren().setAll(pane);
+    /* Navigation utilities (package-private, should only be used by controllers) */
+
+    void goToLoginForm() throws IOException {
+        NodeWithControllerResult<LoginFormController> result = createContentNode(LOGIN_FORM);
+        renderContentNode(result.node());
     }
 
-    public void renderCustomerTable() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(CUSTOMER_TABLE));
-        Node pane = loader.load();
-        CustomerTableController controller = loader.getController();
-        controller.setParentController(this);
-        contentPane.getChildren().setAll(pane);
+    void goToCustomerTable() throws IOException {
+        NodeWithControllerResult<CustomerTableController> result = createContentNode(CUSTOMER_TABLE);
+        renderContentNode(result.node());
     }
 
-    public void renderCustomerForm() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(CUSTOMER_FORM));
-        Node pane = loader.load();
-        CustomerFormController controller = loader.getController();
-        controller.setParentController(this);
-        contentPane.getChildren().setAll(pane);
+    void goToCustomerForm() throws IOException {
+        NodeWithControllerResult<CustomerFormController> result = createContentNode(CUSTOMER_FORM);
+        renderContentNode(result.node());
     }
 
-    public void renderAppointmentTable() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(APPOINTMENT_TABLE));
-        Node pane = loader.load();
-        AppointmentTableController controller = loader.getController();
-        controller.setParentController(this);
-        contentPane.getChildren().setAll(pane);
+    void goToCustomerForm(int customerId) throws IOException {
+        NodeWithControllerResult<CustomerFormController> result = createContentNode(CUSTOMER_FORM);
+        result.controller().setCustomerId(customerId);
+        renderContentNode(result.node());
     }
 
-    public void renderAppointmentForm() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(APPOINTMENT_FORM));
-        Node pane = loader.load();
-        AppointmentFormController controller = loader.getController();
+    void goToAppointmentTable() throws IOException {
+        NodeWithControllerResult<AppointmentTableController> result = createContentNode(APPOINTMENT_TABLE);
+        renderContentNode(result.node());
+    }
+
+    void goToAppointmentForm() throws IOException {
+        NodeWithControllerResult<AppointmentFormController> result = createContentNode(APPOINTMENT_FORM);
+        renderContentNode(result.node());
+    }
+
+    void goToAppointmentForm(int appointmentId) throws IOException {
+        NodeWithControllerResult<AppointmentFormController> result = createContentNode(APPOINTMENT_FORM);
+        result.controller().setAppointmentId(appointmentId);
+        renderContentNode(result.node());
+    }
+
+    /* Navigation implementation utilities */
+
+    private <C extends ContentController> NodeWithControllerResult<C> createContentNode(String location) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(location));
+        Node node = loader.load();
+        C controller = loader.getController();
         controller.setParentController(this);
-        contentPane.getChildren().setAll(pane);
+        return new NodeWithControllerResult<>(node, controller);
+    }
+
+    private void renderContentNode(Node node) {
+        contentPane.getChildren().setAll(node);
     }
 }
+
+record NodeWithControllerResult<C extends ContentController>(Node node, C controller) { }
