@@ -1,8 +1,11 @@
 package controllers;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 
 public class CustomerTableController extends ContentController {
+    private SimpleIntegerProperty selectedCustomerProperty = new SimpleIntegerProperty();
+
 //    @FXML
 //    private TableView<Customer> customerTable;
 //    @FXML

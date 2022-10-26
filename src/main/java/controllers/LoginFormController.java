@@ -18,8 +18,6 @@ public class LoginFormController extends ContentController {
     private final SimpleStringProperty candidatePassword = new SimpleStringProperty();
 
     @FXML
-    private Label titleLabel;
-    @FXML
     private Label userNameLabel;
     @FXML
     private TextField usernameField;
@@ -47,7 +45,6 @@ public class LoginFormController extends ContentController {
 
         /* Content language */
         ResourceBundle content = ResourceBundle.getBundle("properties.content");
-        titleLabel.setText(content.getString("login_title"));
         userNameLabel.setText(content.getString("login_username"));
         passwordLabel.setText(content.getString("login_password"));
         submitButton.setText(content.getString("login_submit"));
@@ -70,7 +67,7 @@ public class LoginFormController extends ContentController {
         passwordField.disableProperty().set(true);
 
         if (LoginService.authenticate(candidateUsername.get(), candidatePassword.get())) {
-            parentController.goToCustomerTable();
+            parentController.onLogin();
         } else {
             errorLabel.setText(credentialsErrorMsg);
         }

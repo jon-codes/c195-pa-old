@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      xmlns="http://javafx.com/javafx"
+      fx:controller="controllers.ReportTableController">
+    <TabPane>
+        <tabs>
+            <Tab text="Report 1" closable="false">
+                <content></content>
+            </Tab>
+            <Tab text="Report 2" closable="false">
+                <content></content>
+            </Tab>
+            <Tab text="Report 3" closable="false">
+                <content></content>
+            </Tab>
+        </tabs>
+    </TabPane>
+</VBox>

@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controllers.AppointmentTableController"
-      prefHeight="400.0" prefWidth="600.0">
-    <Label text="Appointments" fx:id="titleLabel" />
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      xmlns="http://javafx.com/javafx"
+      fx:controller="controllers.AppointmentTableController">
+    <TabPane>
+        <Tab text="This week" closable="false">
+<!--            <content></content>-->
+        </Tab>
+        <Tab text="This month" closable="false">
+<!--            <content></content>-->
+        </Tab>
+    </TabPane>
+    <HBox>
+        <Button text="New" fx:id="newButton"/>
+        <Button text="Edit" fx:id="editButton"/>
+        <Button text="Delete" fx:id="deleteButton"/>
+    </HBox>
 </VBox>

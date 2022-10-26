@@ -5,7 +5,6 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="controllers.LoginFormController"
       xmlns="http://javafx.com/javafx/11">
-    <Label text="Login" fx:id="titleLabel"/>
     <Label text="Username" fx:id="userNameLabel"/>
     <TextField fx:id="usernameField"/>
     <Label text="Password" fx:id="passwordLabel"/>
