@@ -14,7 +14,7 @@
         <TextField fx:id="usernameField"/>
         <Label text="Password" fx:id="passwordLabel"/>
         <PasswordField fx:id="passwordField"/>
-        <Label fx:id="errorLabel"/>
+        <Label fx:id="errorLabel" styleClass="error-label"/>
     </VBox>
     <HBox>
         <ToolBar maxWidth="Infinity" prefHeight="40.0"
