@@ -12,14 +12,14 @@
         </VBox.margin>
         <TableView fx:id="customerTable">
             <columns>
-                <TableColumn fx:id="idColumn" editable="false" text="ID" />
-                <TableColumn fx:id="nameColumn" editable="false" text="Name" />
-                <TableColumn fx:id="addressColumn" editable="false" text="Address" />
-                <TableColumn fx:id="postalCodeColumn" editable="false" text="PostalCode" />
-                <TableColumn fx:id="phoneColumn" editable="false" text="Phone" />
+                <TableColumn fx:id="idColumn" editable="false" text="ID"/>
+                <TableColumn fx:id="nameColumn" editable="false" text="Name"/>
+                <TableColumn fx:id="addressColumn" editable="false" text="Address"/>
+                <TableColumn fx:id="postalCodeColumn" editable="false" text="PostalCode"/>
+                <TableColumn fx:id="phoneColumn" editable="false" text="Phone"/>
             </columns>
             <columnResizePolicy>
-                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
         </TableView>
     </VBox>

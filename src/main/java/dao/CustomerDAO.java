@@ -18,6 +18,7 @@ public class CustomerDAO {
     private static final String addressColumn = "Address";
     private static final String postalCodeColumn = "Postal_Code";
     private static final String phoneColumn = "Phone";
+    private static final String divisionIdColumn = "Division_ID";
 
     public static List<Customer> selectAll() {
         ArrayList<Customer> customers = new ArrayList<>();
@@ -29,7 +30,7 @@ public class CustomerDAO {
             while (resultSet.next()) {
                 customers.add(createCustomerFromResultSet(resultSet));
             }
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             ErrorHandling.printTraceAndExit(e);
         }
 
@@ -43,7 +44,7 @@ public class CustomerDAO {
             PreparedStatement statement = DbConnection.get().prepareStatement(query);
             statement.setInt(1, id);
             statement.executeUpdate();
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             ErrorHandling.printTraceAndExit(e);
         }
     }
@@ -54,7 +55,8 @@ public class CustomerDAO {
                 resultSet.getString(nameColumn),
                 resultSet.getString(addressColumn),
                 resultSet.getString(postalCodeColumn),
-                resultSet.getString(phoneColumn)
+                resultSet.getString(phoneColumn),
+                resultSet.getInt(divisionIdColumn)
         );
     }
 }

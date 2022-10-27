@@ -1,8 +1,9 @@
 package controllers;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.event.ActionEvent;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
@@ -10,12 +11,21 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 import models.Country;
+import models.Customer;
 import models.Division;
 import repositories.CountryRepository;
 
 import java.io.IOException;
 
 public class CustomerFormController extends ContentController {
+    private final SimpleIntegerProperty idValue = new SimpleIntegerProperty();
+    private final SimpleStringProperty nameValue = new SimpleStringProperty();
+    private final SimpleStringProperty addressValue = new SimpleStringProperty();
+    private final SimpleStringProperty postalCodeValue = new SimpleStringProperty();
+    private final ObjectProperty<Country> countryValue = new SimpleObjectProperty<>();
+    private final ObjectProperty<Division> divisionValue = new SimpleObjectProperty<>();
+    private final SimpleStringProperty phoneValue = new SimpleStringProperty();
+
     @FXML
     private TextField idField;
     @FXML
@@ -31,16 +41,16 @@ public class CustomerFormController extends ContentController {
     @FXML
     private TextField phoneField;
 
-    private final ObjectProperty<Country> selectedCountry = new SimpleObjectProperty<>();
-    private final ObjectProperty<Division> selectedDivision = new SimpleObjectProperty<>();
-
-    private int customerId;
-
-    /* Set by calling controller when an existing customer is being edited. */
-    void setCustomerId(int customerId) { this.customerId = customerId; }
 
     @FXML
     private void initialize() {
+        /* Init text fields */
+        nameField.textProperty().bindBidirectional(nameValue);
+        addressField.textProperty().bindBidirectional(addressValue);
+        postalCodeField.textProperty().bindBidirectional(postalCodeValue);
+        phoneField.textProperty().bind(phoneValue);
+
+        /* Init combo fields */
         countryComboBox.setItems(CountryRepository.list());
         Callback<ListView<Country>, ListCell<Country>> countryFactory = lv -> new ListCell<>() {
             @Override
@@ -52,10 +62,10 @@ public class CustomerFormController extends ContentController {
         countryComboBox.setButtonCell(countryFactory.call(null));
         countryComboBox.setCellFactory(countryFactory);
 
-        countryComboBox.valueProperty().bindBidirectional(selectedCountry);
+        countryComboBox.valueProperty().bindBidirectional(countryValue);
         countryComboBox.getSelectionModel().selectFirst();
 
-        divisionComboBox.setItems(selectedCountry.get().getDivisions());
+        divisionComboBox.setItems(countryValue.get().getDivisions());
         Callback<ListView<Division>, ListCell<Division>> divisionFactory = lv -> new ListCell<>() {
             @Override
             protected void updateItem(Division division, boolean empty) {
@@ -66,23 +76,36 @@ public class CustomerFormController extends ContentController {
         divisionComboBox.setButtonCell(divisionFactory.call(null));
         divisionComboBox.setCellFactory(divisionFactory);
 
-        divisionComboBox.valueProperty().bindBidirectional(selectedDivision);
+        divisionComboBox.valueProperty().bindBidirectional(divisionValue);
         divisionComboBox.getSelectionModel().selectFirst();
 
-        selectedCountry.addListener((obs, oldValue, newValue) -> {
-            divisionComboBox.setItems(selectedCountry.get().getDivisions());
+        countryValue.addListener((obs, oldValue, newValue) -> {
+            divisionComboBox.setItems(countryValue.get().getDivisions());
             divisionComboBox.getSelectionModel().selectFirst();
         });
+    }
 
+    public void setEdit(Customer customer) {
+        /* Set (non-editable) id value */
+        idValue.set(customer.id());
+        idField.setText(customer.id().toString());
+
+        /* Set editable values */
+        nameValue.set(customer.name());
+        addressValue.set(customer.address());
+        postalCodeValue.set(customer.postalCode());
+        customer.getCountry().ifPresent(countryValue::set);
+        customer.getDivision().ifPresent(divisionValue::set);
+        phoneValue.set(customer.phone());
     }
 
     @FXML
-    private void handleCancel(ActionEvent actionEvent) throws IOException {
+    private void handleCancel() throws IOException {
         parentController.goToCustomerTable();
     }
 
     @FXML
-    private void handleSubmit(ActionEvent actionEvent) {
-        // TODO: implement
+    private void handleSubmit() {
+        // TODO: implement method
     }
 }

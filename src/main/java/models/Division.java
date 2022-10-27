@@ -1,4 +1,12 @@
 package models;
 
-public record Division(int id, String name, int countryId) {
+import repositories.CountryRepository;
+
+import java.util.Optional;
+
+public record Division(Integer id, String name, Integer countryId) {
+
+    public Optional<Country> getCountry() {
+        return CountryRepository.get(countryId);
+    }
 }

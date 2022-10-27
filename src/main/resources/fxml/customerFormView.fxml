@@ -10,20 +10,20 @@
         <VBox.margin>
             <Insets topRightBottomLeft="20"/>
         </VBox.margin>
-        <Label text="ID" />
-        <TextField fx:id="idField" text="Generated" disable="true" />
-        <Label text="Name" />
-        <TextField fx:id="nameField" />
-        <Label text="Address" />
-        <TextField fx:id="addressField" />
-        <Label text="Postal code" />
-        <TextField fx:id="postalCodeField" />
-        <Label text="Division" />
-        <ComboBox fx:id="divisionComboBox" />
-        <Label text="Country" />
-        <ComboBox fx:id="countryComboBox" />
-        <Label text="Phone" />
-        <TextField fx:id="phoneField" />
+        <Label text="ID"/>
+        <TextField fx:id="idField" text="Generated" disable="true"/>
+        <Label text="Name"/>
+        <TextField fx:id="nameField"/>
+        <Label text="Address"/>
+        <TextField fx:id="addressField"/>
+        <Label text="Postal code"/>
+        <TextField fx:id="postalCodeField"/>
+        <Label text="Division"/>
+        <ComboBox fx:id="divisionComboBox"/>
+        <Label text="Country"/>
+        <ComboBox fx:id="countryComboBox"/>
+        <Label text="Phone"/>
+        <TextField fx:id="phoneField"/>
     </VBox>
     <HBox>
         <ToolBar maxWidth="Infinity" prefHeight="40.0" HBox.hgrow="ALWAYS">

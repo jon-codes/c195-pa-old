@@ -26,8 +26,7 @@ public class CountryDAO {
             while (resultSet.next()) {
                 countries.add(createCountryFromResultSet(resultSet));
             }
-        }
-        catch(SQLException e) {
+        } catch (SQLException e) {
             ErrorHandling.printTraceAndExit(e);
         }
 

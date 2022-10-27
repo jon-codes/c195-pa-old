@@ -6,5 +6,6 @@ public class ReportTableController extends ContentController {
 
     @FXML
     private void initialize() {
+        // TODO: implement method
     }
 }

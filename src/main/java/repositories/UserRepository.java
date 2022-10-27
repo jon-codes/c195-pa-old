@@ -30,9 +30,9 @@ public class UserRepository {
 
     private static int currentUserId;
 
-    public static Optional<User> get(int id) {
+    public static Optional<User> get(Integer id) {
         for (User user : users) {
-            if (user.id() == id) return Optional.of(user);
+            if (user.id().equals(id)) return Optional.of(user);
         }
         return Optional.empty();
     }
@@ -44,7 +44,9 @@ public class UserRepository {
         return Optional.empty();
     }
 
-    public static Optional<User> getCurrentUser() { return get(currentUserId); }
+    public static Optional<User> getCurrentUser() {
+        return get(currentUserId);
+    }
 
     public static boolean authenticate(String username, String password) throws IOException {
         Instant timestamp = Instant.now();

@@ -19,19 +19,19 @@ public class CustomerRepository {
         return FXCollections.unmodifiableObservableList(customers);
     }
 
-    public static Optional<Customer> get(int id) {
+    public static Optional<Customer> get(Integer id) {
         for (Customer customer : customers) {
-            if (customer.id() == id) return Optional.of(customer);
+            if (customer.id().equals(id)) return Optional.of(customer);
         }
         return Optional.empty();
     }
 
-    public static boolean delete(int id) {
+    public static boolean delete(Integer id) {
         Optional<Customer> customer = get(id);
 
         if (customer.isPresent()) {
             CustomerDAO.delete(id);
-            customers.removeIf(c -> c.id() == id);
+            customers.removeIf(c -> c.id().equals(id));
             return true;
         }
 

@@ -1,6 +1,6 @@
 package models;
 
-public record User(int id, String username, String password) {
+public record User(Integer id, String username, String password) {
 
     public boolean checkPassword(String candidatePassword) {
         return candidatePassword.equals(password);

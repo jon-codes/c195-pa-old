@@ -1,7 +1,6 @@
 package controllers;
 
 import javafx.beans.property.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -11,6 +10,7 @@ import repositories.CustomerRepository;
 import java.io.IOException;
 
 public class CustomerTableController extends ContentController {
+
     private final ObjectProperty<Customer> selectedCustomer = new SimpleObjectProperty<>();
 
     @FXML
@@ -60,11 +60,11 @@ public class CustomerTableController extends ContentController {
 
     @FXML
     private void handleEdit() throws IOException {
-        parentController.goToCustomerForm(selectedCustomer.get().id());
+        parentController.goToCustomerForm(selectedCustomer.get());
     }
 
     @FXML
-    private void handleDelete(ActionEvent actionEvent) {
+    private void handleDelete() {
         String confirmMessage = "Are you sure you want to delete customer " + selectedCustomer.get().id() + "?";
         String successMessage = "Customer " + selectedCustomer.get().id() + " successfully deleted.";
 

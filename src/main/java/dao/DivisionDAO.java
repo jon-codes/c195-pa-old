@@ -27,8 +27,7 @@ public class DivisionDAO {
             while (resultSet.next()) {
                 divisions.add(createDivisionFromResultSet(resultSet));
             }
-        }
-        catch(SQLException e) {
+        } catch (SQLException e) {
             ErrorHandling.printTraceAndExit(e);
         }
 

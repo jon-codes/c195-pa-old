@@ -7,20 +7,24 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import models.Appointment;
+import models.Customer;
 
 import java.io.IOException;
 import java.util.ResourceBundle;
 
 public class MainController {
 
-    /* Primary stage (set in application main method, allows setting the title) */
     private Stage primaryStage;
 
     public void setPrimaryStage(Stage stage) {
         this.primaryStage = stage;
     }
 
-    private void updateTitle(String screenName) {
+    private final ResourceBundle content = ResourceBundle.getBundle("properties.content");
+
+    private void updateTitle(String key) {
+        primaryStage.setTitle(content.getString("app_title") + " - " + content.getString(key));
     }
 
     /* Navigation properties */
@@ -78,9 +82,7 @@ public class MainController {
     void goToCustomerTable() throws IOException {
         NodeControllerResult<CustomerTableController> result = createContentNode(CUSTOMER_TABLE);
         renderContentNode(result.node());
-
-        ResourceBundle content = ResourceBundle.getBundle("properties.content");
-        primaryStage.setTitle(content.getString("app_title") + " - " + content.getString("customer_title"));
+        updateTitle("customer_title");
 
         // TODO: handle this via some observable property?
         customerNavButton.disableProperty().set(true);
@@ -93,18 +95,16 @@ public class MainController {
         renderContentNode(result.node());
     }
 
-    void goToCustomerForm(int customerId) throws IOException {
+    void goToCustomerForm(Customer customer) throws IOException {
         NodeControllerResult<CustomerFormController> result = createContentNode(CUSTOMER_FORM);
-        result.controller().setCustomerId(customerId);
+        result.controller.setEdit(customer);
         renderContentNode(result.node());
     }
 
     void goToAppointmentTable() throws IOException {
         NodeControllerResult<AppointmentTableController> result = createContentNode(APPOINTMENT_TABLE);
         renderContentNode(result.node());
-
-        ResourceBundle content = ResourceBundle.getBundle("properties.content");
-        primaryStage.setTitle(content.getString("app_title") + " - " + content.getString("appointment_title"));
+        updateTitle("appointment_title");
 
         customerNavButton.disableProperty().set(false);
         appointmentNavButton.disableProperty().set(true);
@@ -116,18 +116,16 @@ public class MainController {
         renderContentNode(result.node());
     }
 
-    void goToAppointmentForm(int appointmentId) throws IOException {
+    void goToAppointmentForm(Appointment appointment) throws IOException {
         NodeControllerResult<AppointmentFormController> result = createContentNode(APPOINTMENT_FORM);
-        result.controller().setAppointmentId(appointmentId);
+        result.controller().setEdit(appointment);
         renderContentNode(result.node());
     }
 
     void goToReportTable() throws IOException {
         NodeControllerResult<ReportTableController> result = createContentNode(REPORT_TABLE);
         renderContentNode(result.node());
-
-        ResourceBundle content = ResourceBundle.getBundle("properties.content");
-        primaryStage.setTitle(content.getString("app_title") + " - " + content.getString("report_title"));
+        updateTitle("report_title");
 
         customerNavButton.disableProperty().set(false);
         appointmentNavButton.disableProperty().set(false);
@@ -136,7 +134,8 @@ public class MainController {
 
     /* Navigation implementation utilities */
 
-    private static record NodeControllerResult<C extends ContentController>(Node node, C controller) { }
+    private record NodeControllerResult<C extends ContentController>(Node node, C controller) {
+    }
 
     private <C extends ContentController> NodeControllerResult<C> createContentNode(String location) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(location));

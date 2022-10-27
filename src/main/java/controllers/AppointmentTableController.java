@@ -1,31 +1,32 @@
 package controllers;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.event.ActionEvent;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
+import models.Appointment;
 
 import java.io.IOException;
 
 public class AppointmentTableController extends ContentController {
-    private final IntegerProperty selectedAppointmentId = new SimpleIntegerProperty();
+    private final ObjectProperty<Appointment> selectedAppointment = new SimpleObjectProperty<>();
 
     @FXML
     private void initialize() {
+        // TODO: implement method
     }
 
     @FXML
-    private void handleNew(ActionEvent actionEvent) throws IOException {
+    private void handleNew() throws IOException {
         parentController.goToAppointmentForm();
     }
 
     @FXML
-    private void handleEdit(ActionEvent actionEvent) {
-        // TODO: implement
+    private void handleEdit() throws IOException {
+        parentController.goToAppointmentForm(selectedAppointment.get());
     }
 
     @FXML
-    private void handleDelete(ActionEvent actionEvent) {
-        // TODO: implement
+    private void handleDelete() {
+        // TODO: implement method
     }
 }

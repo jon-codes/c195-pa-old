@@ -7,16 +7,11 @@
       xmlns="http://javafx.com/javafx"
       fx:controller="controllers.ReportTableController">
     <TabPane>
-        <tabs>
-            <Tab text="Report 1" closable="false">
-                <content></content>
-            </Tab>
-            <Tab text="Report 2" closable="false">
-                <content></content>
-            </Tab>
-            <Tab text="Report 3" closable="false">
-                <content></content>
-            </Tab>
-        </tabs>
+        <Tab text="Report 1" closable="false">
+        </Tab>
+        <Tab text="Report 2" closable="false">
+        </Tab>
+        <Tab text="Report 3" closable="false">
+        </Tab>
     </TabPane>
 </VBox>
